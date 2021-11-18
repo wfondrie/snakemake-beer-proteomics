@@ -70,6 +70,13 @@ To run this workflow on your local machine using all available cores:
 snakemake --cores all
 ```
 
+When you run this workflow for the first time, snakemake organize jobs into the
+directed acyclic graph (DAG) below. During execution, independent jobs are
+conducted in parallel while dependent jobs wait for their dependencies to
+become available.
+
+![The DAG for this workflow](static/dag.png)
+
 To run this workflow on an SGE cluster like at UWGS:
 
 ``` sh
@@ -107,6 +114,9 @@ snakemake-beer-proteomics
 |
 |- params             # Parameter files.
 |  `- comet.params    # The Comet search parameters. 
+|
+|- static             # Static assets for things like the README
+|  `- dag.png         # The DAG for this workflow.
 |
 |- logs               # Log files from the various steps of the pipelne.
 |- envs               # The installed conda environement.
