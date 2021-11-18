@@ -47,7 +47,7 @@ rule comet_search:
     shell:
         """
         cd results/comet && \
-        comet -P../../params/comet.params ../../{input[0]} 2> {log}
+        comet -P../../params/comet.params ../../{input[0]} 2> ../../{log}
         """
 
 rule mokapot:
