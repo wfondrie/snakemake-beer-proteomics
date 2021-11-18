@@ -80,7 +80,7 @@ become available.
 To run this workflow on the Noble lab SGE cluster:
 
 ``` sh
-snakemake --profile sge --use-conda
+snakemake --cores all --profile sge --use-conda
 ```
 *Note, you should ideally encapsulate this command into its own job, rather than running it on the head node.*
 
