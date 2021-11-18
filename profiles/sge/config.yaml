@@ -1,0 +1,11 @@
+cluster:
+  qsub -l h_rt={resources.h_rt},mfree={resources.mfree}
+  -pe serial {resources.cpus} -cwd -q {resources.queue}
+jobs: 50
+
+# The default resources when not specified:
+default-resources:
+  - h_rt="1:0:0"
+  - mfree="8G"
+  - cpus="1"
+  - queue="noble-short.q"
