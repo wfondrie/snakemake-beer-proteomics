@@ -5,5 +5,7 @@
 #$ -e logs/snakemake.log
 #$ -o logs/snakemake.log
 set -euo pipefail
+
+conda deactivate
 conda activate ./envs
 snakemake --profile profiles/sge
