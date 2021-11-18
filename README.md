@@ -53,7 +53,7 @@ cd snakemake-beer-proteomics
 Create the conda environment:
 
 ``` sh
-conda env create --prefix ./envs -f environment.yml
+conda env create --prefix ./envs -f environment.yaml
 ```
 
 Activate the conda environment:
