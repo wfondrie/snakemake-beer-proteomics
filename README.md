@@ -77,7 +77,7 @@ become available.
 
 ![The DAG for this workflow](static/dag.png)
 
-To run this workflow on an SGE cluster like at UWGS:
+To run this workflow on the Noble lab SGE cluster:
 
 ``` sh
 snakemake --profile sge --use-conda

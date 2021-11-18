@@ -12,7 +12,7 @@ rule download_raw_files:
     log: "logs/ppx.log"
     conda: "environment.yaml"
     shell:
-        "ppx --local data MSV000088080 '07_Evosep_Exploris480_*_1.raw' 2> {log}"
+        "ppx --local data MSV000088080 '07_Evosep_Exploris480_*_1.raw' &> {log}"
 
 
 rule download_fasta_file:
@@ -23,7 +23,7 @@ rule download_fasta_file:
         """
         wget -O data/fasta/beer.fasta 'https://www.uniprot.org/uniprot/?query=\
         (taxonomy:559292 OR taxonomy:4565 OR taxonomy:4513 OR taxonomy:3486) AND reviewed:yes\
-        &format=fasta' 2> {log}
+        &format=fasta' &> {log}
         """
 
 
@@ -33,7 +33,7 @@ rule convert_raw_files:
     log: "logs/thermorawfileparser.{stem}.log"
     conda: "environment.yaml"
     shell:
-        "thermorawfileparser --gzip --output data/mzML --input {input} 2> {log}"
+        "thermorawfileparser --gzip --output data/mzML --input {input} &> {log}"
 
 
 rule comet_search:
@@ -50,7 +50,7 @@ rule comet_search:
         mfree=1
     shell:
         """
-        comet -Pparams/comet.params {input[0]} 2> {log} && \
+        comet -Pparams/comet.params {input[0]} &> {log} && \
         mv data/mzML/{wildcards.stem}.pin {output}
         """
 
@@ -76,7 +76,7 @@ rule mokapot:
           --dest_dir results/mokapot \
           --proteins {input.fasta} \
           {input.pins} \
-        2> {log}
+        &> {log}
         """
 
 
