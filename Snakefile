@@ -42,7 +42,8 @@ rule comet_search:
     log: "logs/comet.{stem}.log"
     threads: workflow.cores
     resources:
-        cpus=12
+        cpus=12,
+        mfree=1
     shell:
         """
         cd results/comet && \
@@ -62,7 +63,8 @@ rule mokapot:
     log: "logs/mokapot.log"
     threads: workflow.cores
     resources:
-        cpus=12
+        cpus=12,
+        mfree=1
     shell:
         """
         mokapot \
