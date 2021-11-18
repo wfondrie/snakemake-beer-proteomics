@@ -29,7 +29,7 @@ Linux systems. First, if you'll need a working conda installation. If you need
 to install one, I recommend
 [miniconda](https://docs.conda.io/en/latest/miniconda.html). You'll also need
 [git](https://git-scm.com/) to clone this repository, which can be installed
-using conda with:
+using conda:
 
 ``` sh
 conda install git
@@ -53,7 +53,7 @@ cd snakemake-beer-proteomics
 Create the conda environment:
 
 ``` sh
-conda create --prefix ./envs -f environment.yml
+conda env create --prefix ./envs -f environment.yml
 ```
 
 Activate the conda environment:
@@ -104,6 +104,9 @@ snakemake-beer-proteomics
 |     `- config.yaml  # The configuration file that tells snakemake how to 
 |                     #   submit jobs to the cluster and what resources we
 |                     #   can specify.
+|
+|- params             # Parameter files.
+|  `- comet.params    # The Comet search parameters. 
 |
 |- envs               # The installed conda environement.
 |- README.md          # This file.
