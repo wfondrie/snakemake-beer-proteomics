@@ -18,7 +18,7 @@ It specifically performs the following steps:
    [Comet](https://uwpr.github.io/Comet/).
 5. Refines the search results with
    [mokapot](https://mokapot.readthedocs.io/en/latest/) using a joint model.
-5. Creates a plot showing the number of PSMs from each.
+5. Creates a plot showing the number of PSMs, peptides, and proteins from each.
 
 
 ## Setup
@@ -108,7 +108,9 @@ snakemake-beer-proteomics
 |- params             # Parameter files.
 |  `- comet.params    # The Comet search parameters. 
 |
+|- logs               # Log files from the various steps of the pipelne.
 |- envs               # The installed conda environement.
+|- job.sh             # An example SGE job script to run the workflow.
 |- README.md          # This file.
 `- LICENSE            # MIT.
 ```
