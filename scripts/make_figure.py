@@ -46,19 +46,24 @@ def create_figure(psms, peptides, proteins):
         The mokapot results at the protein level.
     """
     sns.set_style("ticks")
-    fig, axs = plt.subplot(1, 3, figsize=(12, 4))
+    fig, axs = plt.subplots(1, 3, figsize=(12, 4))
     levels = [psms, peptides, proteins]
     labels = ["PSMs", "Peptides", "Proteins"]
     for ax, level, label in zip(axs, levels, labels):
+        level = level.sort_values("beer")
+        for beer, data in level.groupby("beer"):
+            mokapot.plot_qvalues(
+                data["mokapot q-value"].values,
+                label=beer,
+                ax=ax,
+            )
+
         ax.set_xlabel("q-value")
         ax.set_ylabel(f"Accepted {label}")
         ax.legend()
-        level = level.sort_values("beer")
-        for beer, data in level.groupby("beer"):
-            mokapot.plot_qvalues(data["mokapot q-value"].values, label=beer)
 
     plt.tight_layout()
-    plt.savefig(snakemake.output)
+    plt.savefig(str(snakemake.output))
 
 
 def main():
