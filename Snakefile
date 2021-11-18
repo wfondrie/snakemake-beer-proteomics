@@ -10,6 +10,7 @@ rule all:
 rule download_raw_files:
     output: expand("data/raw/" + STEM + ".raw", beer=BEERS)
     log: "logs/ppx.log"
+    conda: "environment.yaml"
     shell:
         "ppx --local data MSV000088080 '07_Evosep_Exploris480_*_1.raw' 2> {log}"
 
@@ -17,6 +18,7 @@ rule download_raw_files:
 rule download_fasta_file:
     output: "data/fasta/beer.fasta"
     log: "logs/wget.log"
+    conda: "environment.yaml"
     shell:
         """
         wget -O data/fasta/beer.fasta 'https://www.uniprot.org/uniprot/?query=\
@@ -29,6 +31,7 @@ rule convert_raw_files:
     input: "data/raw/{stem}.raw"
     output: "data/mzML/{stem}.mzML.gz"
     log: "logs/thermorawfileparser.{stem}.log"
+    conda: "environment.yaml"
     shell:
         "thermorawfileparser --gzip --output data/mzML --input {input} 2> {log}"
 
@@ -40,14 +43,15 @@ rule comet_search:
     output:
         "results/comet/{stem}.pin"
     log: "logs/comet.{stem}.log"
+    conda: "environment.yaml"
     threads: workflow.cores
     resources:
         cpus=12,
         mfree=1
     shell:
         """
-        cd results/comet && \
-        comet -P../../params/comet.params ../../{input[0]} 2> ../../{log}
+        comet -Pparams/comet.params {input[0]} 2> {log} && \
+        mv data/mzML/{wildcards.stem}.pin {output}
         """
 
 rule mokapot:
@@ -61,6 +65,7 @@ rule mokapot:
             level=["psms", "peptides", "proteins"]
         )
     log: "logs/mokapot.log"
+    conda: "environment.yaml"
     threads: workflow.cores
     resources:
         cpus=12,
@@ -84,5 +89,6 @@ rule make_figure:
         )
     output: "results/figures/detections.png"
     log: "logs/make_figure.log"
+    conda: "environment.yaml"
     script:
         "scripts/make_figure.py"

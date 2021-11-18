@@ -73,7 +73,7 @@ snakemake --cores all
 To run this workflow on an SGE cluster like at UWGS:
 
 ``` sh
-snakemake --profile sge
+snakemake --profile sge --use-conda
 ```
 *Note, you should ideally encapsulate this command into its own job, rather than running it on the head node.*
 
