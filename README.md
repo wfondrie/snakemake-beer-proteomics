@@ -84,6 +84,11 @@ snakemake --cores all --profile sge --use-conda
 ```
 *Note, you should ideally encapsulate this command into its own job, rather than running it on the head node.*
 
+## Expected results
+Once the workflow has completed, you should find that it created `results/figures/detections.png`. The figure should look like this:
+
+![The expected results.](static/detections.png)
+
 ## Repository organization
 
 This is an overview of how this repository is organized after the workflow 
